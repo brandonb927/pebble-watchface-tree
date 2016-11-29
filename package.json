@@ -1,0 +1,34 @@
+{
+  "name": "tree",
+  "version": "0.1.0",
+  "author": "Brandon Brown",
+  "description": "An unofficial VW logo watchface",
+  "repository": "https://github.com/brandonb927/pebble-watchface-tree",
+  "license": "MIT",
+  "keywords": [],
+  "pebble": {
+    "displayName": "VW (unofficial)",
+    "projectType": "rocky",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "uuid": "04561B2F-D38E-468D-9BCA-4CF23D113B1C",
+    "capabilities": [],
+    "resources": {
+      "media": []
+    },
+    "targetPlatforms": [
+      "basalt"
+    ],
+    "watchapp": {
+      "watchface": true
+    }
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.2"
+  },
+  "scripts": {
+    "browsersync": "browser-sync start --no-open --server --files 'src' --index pemulator.html",
+    "start": "npm run browsersync"
+  },
+  "dependencies": {}
+}
