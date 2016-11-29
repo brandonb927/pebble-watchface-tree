@@ -23,6 +23,10 @@ var generateColor = function (prevColor) {
   return color
 }
 
+var monthIsDecember = function () {
+  return new Date().getMonth() === 12 /* December */
+}
+
 var config = {
   // Branding
   brand: {
@@ -31,8 +35,8 @@ var config = {
     colorSecondary: '#fff',
 
     // Branding - Colours
-    fontPrimary: '18px bold Gothic',
-    fontSecondary: '32px bold numbers Leco-numbers',
+    fontPrimary: '28px Gothic',
+    fontSecondary: '28px light numbers Leco-numbers',
   },
 }
 
@@ -55,7 +59,7 @@ var uoHeight = function (ctx, posX) {
   return (posX - obstruction_h)
 }
 
-var drawTree = function (ctx, colorPrimary) {
+var drawTree = function (ctx, date, colorPrimary) {
   var w = canvasBox(ctx).w
   var h = canvasBox(ctx).h
   var centerY = canvasBox(ctx).centerY
@@ -75,110 +79,135 @@ var drawTree = function (ctx, colorPrimary) {
   ctx.lineTo(centerX, (centerY + 30))
 
   ctx.moveTo(centerX, (centerY - 70))
-  ctx.lineTo(branchXPos, (centerY - 55))
+  ctx.lineTo(branchXPos, (centerY - 50))
   ctx.moveTo(centerX, (centerY - 70))
-  ctx.lineTo(branchXNeg, (centerY - 55))
+  ctx.lineTo(branchXNeg, (centerY - 50))
 
-  ctx.moveTo(centerX, (centerY - 50))
-  ctx.lineTo(branchXPos, (centerY - 35))
-  ctx.moveTo(centerX, (centerY - 50))
-  ctx.lineTo(branchXNeg, (centerY - 35))
+  ctx.moveTo(centerX, (centerY - 45))
+  ctx.lineTo(branchXPos, (centerY - 25))
+  ctx.moveTo(centerX, (centerY - 45))
+  ctx.lineTo(branchXNeg, (centerY - 25))
 
-  ctx.moveTo(centerX, (centerY - 30))
-  ctx.lineTo(branchXPos, (centerY - 15))
-  ctx.moveTo(centerX, (centerY - 30))
-  ctx.lineTo(branchXNeg, (centerY - 15))
-
-  ctx.moveTo(centerX, (centerY - 10))
-  ctx.lineTo(branchXPos, (centerY + 5))
-  ctx.moveTo(centerX, (centerY - 10))
-  ctx.lineTo(branchXNeg, (centerY + 5))
+  ctx.moveTo(centerX, (centerY - 20))
+  ctx.lineTo(branchXPos, (centerY))
+  ctx.moveTo(centerX, (centerY - 20))
+  ctx.lineTo(branchXNeg, (centerY))
 
   ctx.stroke()
   ctx.closePath()
 
-  // Lights
-  var light1 = generateColor(null)
-  var light2 = generateColor(light1)
-  var light3 = generateColor(light2)
-  var light4 = generateColor(light3)
-  var light5 = generateColor(light4)
-  var light6 = generateColor(light5)
-  var light7 = generateColor(light5)
-  var light8 = generateColor(light5)
+  if (monthIsDecember()) {
+    // Engage Xmas mode 🎅 ⛄ ❄
 
-  var lightSize = 12
+    // Snow!
+    var snowLength = 24
+    ctx.strokeStyle = '#FFFFFF'
+    ctx.lineWidth = 4
+    ctx.beginPath()
+    ctx.moveTo(centerX, (centerY - 76))
+    ctx.lineTo((centerX + snowLength), (centerY - 58))
+    ctx.moveTo(centerX, (centerY - 76))
+    ctx.lineTo((centerX - snowLength), (centerY - 58))
+    ctx.stroke()
+    ctx.closePath()
 
-  ctx.strokeStyle = light1
-  ctx.lineWidth = lightSize
-  ctx.beginPath()
-  ctx.moveTo((centerX - 18), (centerY - 54))
-  ctx.lineTo((centerX - 18), (centerY - 54))
-  ctx.stroke()
-  ctx.closePath()
+    ctx.lineWidth = 2
+    ctx.beginPath()
+    ctx.moveTo((centerX + 30), (centerY - 28))
+    ctx.lineTo((centerX + 20), (centerY - 36))
+    ctx.moveTo((centerX - 30), (centerY - 28))
+    ctx.lineTo((centerX - 20), (centerY - 36))
+    ctx.stroke()
+    ctx.closePath()
 
-  ctx.strokeStyle = light2
-  ctx.lineWidth = lightSize
-  ctx.beginPath()
-  ctx.moveTo((centerX + 18), (centerY - 54))
-  ctx.lineTo((centerX + 18), (centerY - 54))
-  ctx.stroke()
-  ctx.closePath()
+    ctx.lineWidth = 2
+    ctx.beginPath()
+    ctx.moveTo((centerX + 30), (centerY - 2))
+    ctx.lineTo((centerX + 20), (centerY - 10))
+    ctx.moveTo((centerX - 30), (centerY - 2))
+    ctx.lineTo((centerX - 20), (centerY - 10))
+    ctx.stroke()
+    ctx.closePath()
 
-  ctx.strokeStyle = light3
-  ctx.lineWidth = lightSize
-  ctx.beginPath()
-  ctx.moveTo((centerX - 18), (centerY - 34))
-  ctx.lineTo((centerX - 18), (centerY - 34))
-  ctx.stroke()
-  ctx.closePath()
+    ctx.lineWidth = 6
+    ctx.beginPath()
+    ctx.moveTo((centerX - 50), (centerY + 32))
+    ctx.lineTo((centerX + 50), (centerY + 32))
+    ctx.stroke()
+    ctx.closePath()
 
-  ctx.strokeStyle = light4
-  ctx.lineWidth = lightSize
-  ctx.beginPath()
-  ctx.moveTo((centerX + 18), (centerY - 34))
-  ctx.lineTo((centerX + 18), (centerY - 34))
-  ctx.stroke()
-  ctx.closePath()
+    // Lights!
+    var light1 = generateColor(null)
+    var light2 = generateColor(light1)
+    var light3 = generateColor(light2)
+    var light4 = generateColor(light3)
+    var light5 = generateColor(light4)
+    var light6 = generateColor(light5)
 
-  ctx.strokeStyle = light5
-  ctx.lineWidth = lightSize
-  ctx.beginPath()
-  ctx.moveTo((centerX - 18), (centerY - 14))
-  ctx.lineTo((centerX - 18), (centerY - 14))
-  ctx.stroke()
-  ctx.closePath()
+    var lightSize = 14
 
-  ctx.strokeStyle = light6
-  ctx.lineWidth = lightSize
-  ctx.beginPath()
-  ctx.moveTo((centerX + 18), (centerY - 14))
-  ctx.lineTo((centerX + 18), (centerY - 14))
-  ctx.stroke()
-  ctx.closePath()
+    ctx.strokeStyle = light1
+    ctx.lineWidth = lightSize
+    ctx.beginPath()
+    ctx.moveTo((centerX - 18), (centerY - 50))
+    ctx.lineTo((centerX - 18), (centerY - 50))
+    ctx.stroke()
+    ctx.closePath()
 
-  ctx.strokeStyle = light7
-  ctx.lineWidth = lightSize
-  ctx.beginPath()
-  ctx.moveTo((centerX - 18), (centerY + 6))
-  ctx.lineTo((centerX - 18), (centerY + 6))
-  ctx.stroke()
-  ctx.closePath()
+    ctx.strokeStyle = light2
+    ctx.lineWidth = lightSize
+    ctx.beginPath()
+    ctx.moveTo((centerX + 18), (centerY - 50))
+    ctx.lineTo((centerX + 18), (centerY - 50))
+    ctx.stroke()
+    ctx.closePath()
 
-  ctx.strokeStyle = light8
-  ctx.lineWidth = lightSize
-  ctx.beginPath()
-  ctx.moveTo((centerX + 18), (centerY + 6))
-  ctx.lineTo((centerX + 18), (centerY + 6))
-  ctx.stroke()
-  ctx.closePath()
+    ctx.strokeStyle = light3
+    ctx.lineWidth = lightSize
+    ctx.beginPath()
+    ctx.moveTo((centerX - 18), (centerY - 25))
+    ctx.lineTo((centerX - 18), (centerY - 25))
+    ctx.stroke()
+    ctx.closePath()
 
-  // ctx.strokeStyle = colorPrimary
-  // ctx.lineWidth = 8
-  // ctx.beginPath()
-  // ctx.arc(centerX, (centerY - 22), 50, 0, (2 * Math.PI), false)
-  // ctx.stroke()
-  // ctx.closePath()
+    ctx.strokeStyle = light4
+    ctx.lineWidth = lightSize
+    ctx.beginPath()
+    ctx.moveTo((centerX + 18), (centerY - 25))
+    ctx.lineTo((centerX + 18), (centerY - 25))
+    ctx.stroke()
+    ctx.closePath()
+
+    ctx.strokeStyle = light5
+    ctx.lineWidth = lightSize
+    ctx.beginPath()
+    ctx.moveTo((centerX - 18), (centerY))
+    ctx.lineTo((centerX - 18), (centerY))
+    ctx.stroke()
+    ctx.closePath()
+
+    ctx.strokeStyle = light6
+    ctx.lineWidth = lightSize
+    ctx.beginPath()
+    ctx.moveTo((centerX + 18), (centerY))
+    ctx.lineTo((centerX + 18), (centerY))
+    ctx.stroke()
+    ctx.closePath()
+  }
+}
+
+var drawDate = function (ctx, date) {
+  var w = canvasBox(ctx).w
+  var h = canvasBox(ctx).h
+  var centerY = canvasBox(ctx).centerY
+  var centerX = canvasBox(ctx).centerX
+
+  var clockDate = date.toLocaleDateString(undefined, { month: 'short' }) + ' ' + date.getDate()
+
+  ctx.textAlign = 'center'
+  ctx.font = config.brand.fontPrimary
+  ctx.fillStyle = config.brand.colorSecondary
+  ctx.fillText(clockDate, centerX, (uoHeight(ctx, h) - 32))
 }
 
 var drawTime = function (ctx, date) {
@@ -193,21 +222,7 @@ var drawTime = function (ctx, date) {
   ctx.textAlign = 'center'
   ctx.fillStyle = config.brand.colorSecondary
   ctx.font = config.brand.fontSecondary
-  ctx.fillText(clockTime, centerX, (uoHeight(ctx, h) - 16))
-}
-
-var drawDate = function (ctx, date) {
-  var w = canvasBox(ctx).w
-  var h = canvasBox(ctx).h
-  var centerY = canvasBox(ctx).centerY
-  var centerX = canvasBox(ctx).centerX
-
-  var clockDate = date.toLocaleDateString(undefined, { month: 'short' }) + ' ' + date.getDate()
-
-  ctx.textAlign = 'center'
-  ctx.font = config.brand.fontPrimary
-  ctx.fillStyle = config.brand.colorSecondary
-  ctx.fillText(clockDate, centerX, (uoHeight(ctx, h) - 30))
+  ctx.fillText(clockTime, centerX, (uoHeight(ctx, h) - 8))
 }
 
 rocky.on('draw', function (event) {
@@ -217,7 +232,7 @@ rocky.on('draw', function (event) {
   // Reset the view
   ctx.clearRect(0, 0, canvasBox(ctx).w, canvasBox(ctx).h)
 
-  drawTree(ctx, config.brand.colorPrimary)
+  drawTree(ctx, date, config.brand.colorPrimary)
   drawDate(ctx, date)
   drawTime(ctx, date)
 })
@@ -225,4 +240,14 @@ rocky.on('draw', function (event) {
 rocky.on('minutechange', function (event) {
   // Request the screen to be redrawn on next pass
   rocky.requestDraw()
+})
+
+rocky.on('secondchange', function (event) {
+  // Request the screen to be redrawn on next pass
+  if (monthIsDecember()) {
+    // Every 5 seconds, redraw, only in the month of December
+    if (new Date().getSeconds() % 5 === 0) {
+      rocky.requestDraw()
+    }
+  }
 })
