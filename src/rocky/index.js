@@ -1,6 +1,6 @@
 var rocky = require('rocky')
 
-var DRAW_EVERY_N_SECONDS = 10
+var DRAW_EVERY_N_SECONDS = 20
 
 var colors = [
   '#AAFFAA',
@@ -106,10 +106,10 @@ var drawTree = function (ctx, date, colorPrimary) {
     ctx.strokeStyle = '#FFFFFF'
     ctx.lineWidth = 4
     ctx.beginPath()
-    ctx.moveTo(centerX, (centerY - 76))
-    ctx.lineTo((centerX + snowLength), (centerY - 58))
-    ctx.moveTo(centerX, (centerY - 76))
-    ctx.lineTo((centerX - snowLength), (centerY - 58))
+    ctx.moveTo(centerX, (centerY - 78))
+    ctx.lineTo((centerX + snowLength), (centerY - 60))
+    ctx.moveTo(centerX, (centerY - 78))
+    ctx.lineTo((centerX - snowLength), (centerY - 60))
     ctx.stroke()
     ctx.closePath()
 
@@ -124,10 +124,10 @@ var drawTree = function (ctx, date, colorPrimary) {
 
     ctx.lineWidth = 2
     ctx.beginPath()
-    ctx.moveTo((centerX + 30), (centerY - 2))
-    ctx.lineTo((centerX + 20), (centerY - 10))
-    ctx.moveTo((centerX - 30), (centerY - 2))
-    ctx.lineTo((centerX - 20), (centerY - 10))
+    ctx.moveTo((centerX + 30), (centerY - 4))
+    ctx.lineTo((centerX + 20), (centerY - 12))
+    ctx.moveTo((centerX - 30), (centerY - 4))
+    ctx.lineTo((centerX - 20), (centerY - 12))
     ctx.stroke()
     ctx.closePath()
 
@@ -209,7 +209,7 @@ var drawDate = function (ctx, date) {
   ctx.textAlign = 'center'
   ctx.font = config.brand.fontPrimary
   ctx.fillStyle = config.brand.colorSecondary
-  ctx.fillText(clockDate, centerX, (uoHeight(ctx, h) - 32))
+  ctx.fillText(clockDate, centerX, (uoHeight(ctx, h) - 34))
 }
 
 var drawTime = function (ctx, date) {
@@ -224,7 +224,7 @@ var drawTime = function (ctx, date) {
   ctx.textAlign = 'center'
   ctx.fillStyle = config.brand.colorSecondary
   ctx.font = config.brand.fontSecondary
-  ctx.fillText(clockTime, centerX, (uoHeight(ctx, h) - 8))
+  ctx.fillText(clockTime, centerX, (uoHeight(ctx, h) - 10))
 }
 
 rocky.on('draw', function (event) {
@@ -244,12 +244,13 @@ rocky.on('minutechange', function (event) {
   rocky.requestDraw()
 })
 
-rocky.on('secondchange', function (event) {
-  // Request the screen to be redrawn on next pass
-  if (monthIsDecember()) {
-    // Every n seconds, redraw, only in the month of December lol
+// Don't even register to listen on this event if it's not the correct time of the year
+if (monthIsDecember()) {
+  rocky.on('secondchange', function (event) {
+    // Request the screen to be redrawn on next pass
+    // Every n seconds redraw, only in the month of December lol
     if (new Date().getSeconds() % DRAW_EVERY_N_SECONDS === 0) {
       rocky.requestDraw()
     }
-  }
-})
+  })
+}

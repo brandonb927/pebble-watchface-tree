@@ -1,6 +1,6 @@
 {
   "name": "tree",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Brandon Brown",
   "description": "A simple tree watchface, adding a touch of nature to your wrist",
   "repository": "https://github.com/brandonb927/pebble-watchface-tree",
