@@ -1,7 +1,5 @@
 var rocky = require('rocky')
 
-var DRAW_EVERY_N_SECONDS = 20
-
 var colors = [
   '#AAFFAA',
   '#55FFFF',
@@ -243,14 +241,3 @@ rocky.on('minutechange', function (event) {
   // Request the screen to be redrawn on next pass
   rocky.requestDraw()
 })
-
-// Don't even register to listen on this event if it's not the correct time of the year
-if (monthIsDecember()) {
-  rocky.on('secondchange', function (event) {
-    // Request the screen to be redrawn on next pass
-    // Every n seconds redraw, only in the month of December lol
-    if (new Date().getSeconds() % DRAW_EVERY_N_SECONDS === 0) {
-      rocky.requestDraw()
-    }
-  })
-}
